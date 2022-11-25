@@ -7,7 +7,7 @@ interface ICard {
 }
 
 const Card = ({ children, borderW, borderColor }: ICard) => (
-  <div className={`flex flex-col bg-white ${borderW} ${borderColor}`}>
+  <div className={`flex flex-col relative bg-white ${borderW} ${borderColor}`}>
     {children}
   </div>
 );

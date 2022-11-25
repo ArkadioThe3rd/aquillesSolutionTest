@@ -1,28 +1,39 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react';
 import { SensorLecture, Card } from '../../components';
-import Chart from '../../assets/chart.jpg';
+import { GetData } from '../../services';
+import { ISensorLecture } from '../../components/sensorLecture';
 
-const Home = () => (
-  <div className="flex bg-gray-300 px-14 py-6 w-full">
-    <div className="flex flex-row justify-between w-full">
-      <Card borderW="border-4" borderColor="border-gray-400">
-        <SensorLecture
-          titulo="Grafica 1"
-          descripcion="Esto es una descripcion"
-          active
-          img={Chart}
-        />
-      </Card>
-      <Card borderW="border-4" borderColor="border-gray-400">
-        <SensorLecture
-          titulo="Grafica 1"
-          descripcion="Esto es una descripcion"
-          active
-          img={Chart}
-        />
-      </Card>
+const Home = () => {
+  const [data, setData] = useState<any>();
+  const init = async () => {
+    await GetData().then((response) => {
+      const miRespuesta = response;
+      if (miRespuesta.data !== null) setData(miRespuesta.data);
+    });
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <div className="flex bg-gray-300 w-full h-full">
+      <div className="flex px-14 py-6 w-full">
+        <div className="grid grid-cols-2 grid-flow-row auto-rows-min gap-2 w-full">
+          {data?.map((item: ISensorLecture, index: number) => {
+            const llave = `grafica${index}`;
+            return (
+              <Card key={llave}>
+                <SensorLecture {...item} />
+              </Card>
+            );
+          })}
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Home;

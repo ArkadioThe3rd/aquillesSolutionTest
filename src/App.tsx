@@ -4,12 +4,12 @@ import { NavBar } from './components';
 import RouteHandler from './routes';
 
 const App = () => (
-  <>
-    <NavBar />
-    <BrowserRouter>
+  <BrowserRouter>
+    <div className="w-full h-full overflow-hidden flex flex-col">
+      <NavBar />
       <RouteHandler />
-    </BrowserRouter>
-  </>
+    </div>
+  </BrowserRouter>
 );
 
 export default App;
