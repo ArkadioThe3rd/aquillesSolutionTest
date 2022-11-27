@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
+import { Modal } from 'antd';
 import Chart from '../../assets/chart.jpg';
 
 export interface ISensorLecture {
@@ -12,6 +13,18 @@ export interface ISensorLecture {
 
 const SensorLecture = (datos: ISensorLecture) => {
   const [data, setData] = useState(datos);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+  const handleOk = () => {
+    setIsOpen(false);
+  };
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
   // const { active, description, name } = data;
   return (
     <div className="flex flex-col px-10 py-2.5">
@@ -28,10 +41,32 @@ const SensorLecture = (datos: ISensorLecture) => {
           <img src={Chart} alt="grafica" className="h-28" />
         </div>
         {data?.active ? (
-          <CheckCircleFilled style={{ fontSize: '25px' }} />
+          <button type="button" aria-label="Show modal" onClick={showModal}>
+            <CheckCircleFilled style={{ fontSize: '25px' }} />
+          </button>
         ) : (
-          <CloseCircleFilled style={{ fontSize: '25px' }} />
+          <button type="button" aria-label="Show modal" onClick={showModal}>
+            <CloseCircleFilled style={{ fontSize: '25px' }} />
+          </button>
         )}
+        <Modal
+          title={data?.name}
+          open={isOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <hr />
+          <p>
+            Name:<span className="text-green-700"> {data?.name}</span>
+          </p>
+          <p>
+            Description:{' '}
+            <span className="text-green-700"> {data?.description}</span>
+          </p>
+          <p>
+            Completed:<span className="text-green-700"> Yes</span>
+          </p>
+        </Modal>
       </div>
     </div>
   );
