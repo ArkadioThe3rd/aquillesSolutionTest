@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { IConfiguracionMaquina } from '../components/configuracionMaquina';
+import { IConfiguracionDataBase } from './interface';
 
 async function CreateData({
   name,
@@ -7,7 +7,7 @@ async function CreateData({
   type,
   description,
   active,
-}: IConfiguracionMaquina) {
+}: IConfiguracionDataBase) {
   const peticion = Axios({
     method: 'post',
     url: 'http://localhost:5000/configs',

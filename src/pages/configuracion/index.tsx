@@ -1,21 +1,75 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react';
 import { Col, Row } from 'antd';
-import { GetConfiguration } from '../../services';
+import {
+  GetConfiguration,
+  DeleteData,
+  ModificarData,
+  CreateData,
+} from '../../services';
 import { ConfiguracionMaquina, Formulario, Tabla } from '../../components';
 import { IConfiguracionMaquina } from '../../components/configuracionMaquina';
+import {
+  IConfiguracionDataBase,
+  IServicioDataBase,
+} from '../../services/interface';
 
 const Configuracion = () => {
   const [configs, setConfigs] = useState<any>([]);
-  const init = async () => {
+
+  const CrearConfiguration = async ({
+    name,
+    code,
+    active,
+    type,
+    description,
+  }: IConfiguracionDataBase) => {
+    await CreateData({ name, code, active, type, description }).then(
+      (response) => {
+        const miRespuesta = response;
+        if (miRespuesta.data !== null) setConfigs(miRespuesta.data);
+      },
+    );
+  };
+
+  const obtenerConfiguracion = async () => {
     await GetConfiguration().then((response) => {
       const miRespuesta = response;
       if (miRespuesta.data !== null) setConfigs(miRespuesta.data);
     });
   };
 
+  const editarConfiguracion = async ({
+    name,
+    active,
+    code,
+    description,
+    type,
+    id,
+  }: IServicioDataBase) => {
+    await ModificarData({
+      name,
+      active,
+      code,
+      description,
+      type,
+      id,
+    }).then((response) => {
+      const miRespuesta = response;
+      if (miRespuesta.data !== null) setConfigs(miRespuesta.data);
+    });
+  };
+
+  const eliminarConfiguracion = async (id: number) => {
+    await DeleteData(id).then((response) => {
+      const miRespuesta = response;
+      if (miRespuesta.data !== null) setConfigs(miRespuesta.data);
+    });
+  };
+
   useEffect(() => {
-    init();
+    obtenerConfiguracion();
   }, []);
 
   return (
@@ -34,12 +88,19 @@ const Configuracion = () => {
           >
             {configs?.map((iconfig: IConfiguracionMaquina, index: number) => {
               const llave = `configs-maquina-${index}`;
-              return <ConfiguracionMaquina {...iconfig} key={llave} />;
+              return (
+                <ConfiguracionMaquina
+                  {...iconfig}
+                  eliminar={eliminarConfiguracion}
+                  editar={editarConfiguracion}
+                  key={llave}
+                />
+              );
             })}
           </Tabla>
         </Col>
         <Col span={8}>
-          <Formulario />
+          <Formulario crearData={CrearConfiguration} />
         </Col>
       </Row>
     </div>

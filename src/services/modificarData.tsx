@@ -1,9 +1,5 @@
 import Axios from 'axios';
-import { IConfiguracionMaquina } from '../components/configuracionMaquina';
-
-interface IModificarData extends IConfiguracionMaquina {
-  id: number;
-}
+import { IServicioDataBase } from './interface';
 
 async function ModificarData({
   name,
@@ -12,10 +8,10 @@ async function ModificarData({
   description,
   active,
   id,
-}: IModificarData) {
+}: IServicioDataBase) {
   const peticion = Axios({
-    method: 'post',
-    url: `http://localhost:5000/configs/:${id}`,
+    method: 'put',
+    url: `http://localhost:5000/configs/${id}`,
     data: {
       name,
       code,

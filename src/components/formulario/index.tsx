@@ -1,13 +1,28 @@
+/* eslint-disable no-unused-vars */
 import { Button, Form, Input, Select, Checkbox, InputNumber } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
+import { IConfiguracionDataBase } from '../../services/interface';
+// import { IConfiguracionDataBase } from '../../services/interface';
 
-const Formulario = () => {
-  const onFinish = (values: any) => {
-    console.log('Success', values);
+interface Iformulario {
+  crearData(e: IConfiguracionDataBase): void;
+}
+
+const Formulario = ({ crearData }: Iformulario) => {
+  const handlerFinish = (e: any) => {
+    const variables = {
+      name: e.name,
+      code: e.code,
+      type: e.type,
+      description: e.description,
+      active: e.active,
+    };
+    crearData(variables);
+    console.log('Success', e);
   };
 
   return (
-    <Form onFinish={onFinish} name="CreacionConfig" labelCol={{ span: 4 }}>
+    <Form onFinish={handlerFinish} name="CreacionConfig" labelCol={{ span: 4 }}>
       <Form.Item label="Name" name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -22,8 +37,8 @@ const Formulario = () => {
       >
         <Select>
           <Select.Option value="Type1">Type 1</Select.Option>
-          <Select.Option value="Type2">Type 1</Select.Option>
-          <Select.Option value="Type3">Type 1</Select.Option>
+          <Select.Option value="Type2">Type 2</Select.Option>
+          <Select.Option value="Type3">Type 3</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item label="Description" rules={[{ required: true }]}>
