@@ -5,6 +5,12 @@ import { SensorLecture, Card } from '../../components';
 import { GetData } from '../../services';
 import { ISensorLecture } from '../../components/sensorLecture';
 
+/**
+ * La logica del programa inicia haciendo un llamado al back para traer un arreglo con
+ * toda los datos ya que esto define cuantos componentes debe pintar el programa.
+ * Una vez hecho esto se guardan en un state, y se recorre un map con el array para pasar
+ * la información a cada componente correspondiente.
+ */
 const Home = () => {
   const [data, setData] = useState<any>();
   const init = async () => {

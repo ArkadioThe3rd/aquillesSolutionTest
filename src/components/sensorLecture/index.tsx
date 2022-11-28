@@ -11,6 +11,11 @@ export interface ISensorLecture {
   data: Array<Object>;
 }
 
+/**
+ * Sensor lectura es el componente que sostiene todos los datos de las maquinas para ser leidos en una carta,
+ * en el se encuentran el Modal y los metodos necesarios para que este funcione.
+ */
+
 const SensorLecture = ({ name, description, active, data }: ISensorLecture) => {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -4,6 +4,11 @@ import { Col, Row, Checkbox, Form, Input, Button, Select } from 'antd';
 import { EditFilled, DeleteFilled } from '@ant-design/icons';
 import { IServicioDataBase } from '../../services/interface';
 
+/**
+ * ConfiguracionMaquina es el componete que se pinta en configuracion, y sostiene todos los datos de la configuracion de
+ * las maquinas. Por medio de un isEdit(boolean) se activan los campos del Formulario para poder ser editados.
+ * Todos los metodos asociados a los botones vienen de su padre Configuracion.
+ */
 export interface IConfiguracionMaquina extends IServicioDataBase {
   eliminar(id: number): void;
   editar({

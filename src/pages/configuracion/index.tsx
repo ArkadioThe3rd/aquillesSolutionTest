@@ -15,6 +15,14 @@ import {
   IServicioDataBase,
 } from '../../services/interface';
 
+/**
+ * Configuraciones comparte la misma logica utilizada en el Home para pintar individualmente cada componente
+ * que representa la configuración de las máquinas. Además de esto configuración se encarga de ser el controlador
+ * para realizar las diferentes operaciones que se requiera hacer por el usuario, como, Put, Post o Delete.
+ * Debido a que el back devuelve una lista nueva cada vez que esta es modificada, ya sea en un objeto existente o al crear este;
+ * Se decide tomar esta nueva lista para actualizar el estado de configuraciones haciendo que este refresque los componentes en pantalla.
+ */
+
 const Configuracion = () => {
   const [configs, setConfigs] = useState<any>([]);
 

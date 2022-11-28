@@ -6,6 +6,11 @@ interface ITabla {
   children: React.ReactNode;
 }
 
+/**
+ * Tabla es un pequeño componente que crea los títulos de la tabla de forma dinámica
+ * y agrupa a sus hijos, que serian ConfiguracionMaquina.
+ */
+
 const Tabla = ({ nombreColumnas, children }: ITabla) => (
   <Row className="w-full">
     <Row className="w-full px-2 py-4 bg-gray-100 rounded-t-md">

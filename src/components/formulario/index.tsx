@@ -8,6 +8,12 @@ interface Iformulario {
   crearData(e: IConfiguracionDataBase): void;
 }
 
+/**
+ * Los formularios son creados por medio de los componentes Antd.
+ * Se crea el método handlerFinish para recibir todos los valores del campo y pasarselos, a su padre,
+ * que es el controlador para realizar la creación de una nueva maquina(data).
+ */
+
 const Formulario = ({ crearData }: Iformulario) => {
   const handlerFinish = (e: any) => {
     const variables = {
