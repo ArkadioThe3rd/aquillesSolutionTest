@@ -114,7 +114,7 @@ const ConfiguracionMaquina = ({
             )}
           </Col>
           <Col span={4} className="flex justify-center">
-            <Checkbox />
+            <Checkbox checked={active} disabled />
           </Col>
           <Col span={2} className="flex justify-center">
             {isEdit ? (

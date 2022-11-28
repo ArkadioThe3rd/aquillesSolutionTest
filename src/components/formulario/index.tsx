@@ -18,7 +18,6 @@ const Formulario = ({ crearData }: Iformulario) => {
       active: e.active,
     };
     crearData(variables);
-    console.log('Success', e);
   };
 
   return (
@@ -41,7 +40,11 @@ const Formulario = ({ crearData }: Iformulario) => {
           <Select.Option value="Type3">Type 3</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label="Description" rules={[{ required: true }]}>
+      <Form.Item
+        label="Description"
+        name="description"
+        rules={[{ required: true }]}
+      >
         <TextArea rows={4} />
       </Form.Item>
       <Form.Item
